@@ -136,6 +136,6 @@ Big O : O(nlogn) для qsort
 
     
         
-[ссылка]()
+
 
 </details>
