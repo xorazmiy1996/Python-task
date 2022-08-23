@@ -15,7 +15,41 @@
 
     def is_even(number): return number & 1    
 
+Давайте обратимся к результирующему коду на ассемблере для обеих функций, для начала используем GCC 9.3 на сайте godbolt:
+        
+        def isEven():
 
+        1     0 LOAD_CONST               0 (<code object isEven at 0x564ab172e8f0, file "example.py", line 1>)
+              2 LOAD_CONST               1 ('isEven')
+              4 MAKE_FUNCTION            0
+              6 STORE_NAME               0 (isEven)
+              8 LOAD_CONST               2 (None)
+             10 RETURN_VALUE
+
+          Disassembly of <code object isEven at 0x564ab172e8f0, file "example.py", line 1>:
+        1     0 LOAD_FAST                0 (value)
+              2 LOAD_CONST               1 (2)
+              4 BINARY_MODULO
+              6 LOAD_CONST               2 (0)
+              8 COMPARE_OP               2 (==)
+             10 RETURN_VALUE
+        
+        def is_even():
+
+        1     0 LOAD_CONST               0 (<code object is_even at 0x55ad0475f240, file "example.py", line 1>)
+              2 LOAD_CONST               1 ('is_even')
+              4 MAKE_FUNCTION            0
+              6 STORE_NAME               0 (is_even)
+              8 LOAD_CONST               2 (None)
+             10 RETURN_VALUE
+          Disassembly of <code object is_even at 0x55ad0475f240, file "example.py", line 1>:
+        1     0 LOAD_FAST                0 (number)
+              2 LOAD_CONST               1 (1)
+              4 BINARY_AND
+              6 RETURN_VALUE
+И вот здесь уже есть разница.Функция is_even() работает быстрее, чем функция isEven().   
+        
+        
         
 
 
